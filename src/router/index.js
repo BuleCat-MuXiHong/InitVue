@@ -4,11 +4,16 @@ import SayHi from "@/components/SayHi";
 import VueIf from "@/components/For_If_bind_on";
 import Blog from "@/components/Blog";
 import BlogList from "@/components/BlogList";
-
+import List from "@/components/List";
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path:"/list",
+      name:"list",
+      component:List
+    },
     {
       path: "/",
       name: "SayHi",
