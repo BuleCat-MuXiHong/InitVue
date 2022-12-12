@@ -13,8 +13,11 @@
     "axios": "^1.2.1",
     "element-ui": "^2.15.12",
     "font-awesome": "^4.7.0",
+    "qs": "^6.11.0",
+    "vant": "^4.0.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
