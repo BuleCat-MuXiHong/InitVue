@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="index" >
     <el-container>
       <el-header class="homeHeader">
-        <div class="nav-left">AAAA</div>
+        <div class="nav-left">giao-giao</div>
         <el-menu :default-active="activeIndex"
                  class="el-menu-demo"
                  mode="horizontal"
@@ -17,21 +17,26 @@
 
           <el-menu-item style="width: 11%;"  class="el-menu-item" index="top">排行榜</el-menu-item>
         </el-menu>
-        <div class="nav-right">BBBB</div>
+        <div class="nav-right">giao~</div>
       </el-header>
-      <!--      <el-main>Main</el-main>-->
+            <el-main>
+              <book-info/>
+            </el-main>
       <!--      <el-footer>Footer</el-footer>-->
     </el-container>
   </div>
 </template>
 
 <script>
+import BookInfo from "@/components/BookInfo";
 export default {
   name: "bookTag",
+  components: {BookInfo},
   data() {
     return {
       bookTypes: [],
-      activeIndex: "1"
+      activeIndex: "1",
+
     }
   },
   methods: {
@@ -48,6 +53,9 @@ export default {
 </script>
 
 <style scoped>
+.index{
+  background-image: url("../static/img/Background_with_line_wave_pattern_5.jpg");
+}
 .homeHeader {
   width: 100%;
   background-color: #545c64;

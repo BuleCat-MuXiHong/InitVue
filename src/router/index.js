@@ -6,6 +6,7 @@ import Blog from "@/components/Blog";
 import BlogList from "@/components/BlogList";
 import List from "@/components/List";
 import bookTag from "@/components/bookTag";
+import bookInfo from '@/components/BookInfo'
 Vue.use(Router)
 
 export default new Router({
@@ -40,6 +41,11 @@ export default new Router({
       path:"/bookTag",
       name:'bookTag',
       component:bookTag
+    },
+    {
+      path:"/bookInfo",
+      name:"bookInfo",
+      component:bookInfo
     }
   ]
 })
