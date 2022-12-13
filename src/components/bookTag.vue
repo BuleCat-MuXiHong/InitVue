@@ -11,9 +11,11 @@
                  text-color="#fff"
                  active-text-color="#ffd04b"
         >
-          <el-menu-item  v-for="bookType in bookTypes" v-bind:key="bookType.id" :index="bookType.id.toString()">
+          <el-menu-item  style="width: 11%;"  v-for="bookType in bookTypes" v-bind:key="bookType.id" :index="bookType.id.toString()">
             {{ bookType.book_type }}
           </el-menu-item>
+
+          <el-menu-item style="width: 11%;"  class="el-menu-item" index="top">排行榜</el-menu-item>
         </el-menu>
         <div class="nav-right">BBBB</div>
       </el-header>
@@ -40,7 +42,6 @@ export default {
   created() {
     this.$http.get("/bookType/getBookTypeList").then((response) => {
       this.bookTypes = response.data.result
-      console.log(this.bookTypes)
     })
   }
 }
@@ -51,18 +52,22 @@ export default {
   width: 100%;
   background-color: #545c64;
 }
-
+.homeHeader .el-menu-demo {
+  width: 50%;
+  height: 99%;
+  display: inline-block;
+  margin: 0 auto;
+  text-align: center;
+}
 .homeHeader .nav-left {
   width: 20%;
   height: 60px;
   font-size: 30px;
   color: #fff;
+  float: left;
+  line-height: 60px;
   display: inline;
-}
-
-.homeHeader .el-menu-demo {
-  width: 60%;
-  display: inline;
+  text-align: center;
 }
 
 .homeHeader .nav-right {
@@ -71,5 +76,7 @@ export default {
   color: #fff;
   display: inline;
   float: right;
+  text-align: center;
+  line-height: 60px;
 }
 </style>
