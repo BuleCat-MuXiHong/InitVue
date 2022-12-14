@@ -2,16 +2,17 @@
   <div>
     <!--    <li v-for="bookInfo in bookInfos">{{bookinfo}}</li>-->
     <div class="bookInfoCardList">
-      <div class="box-card" v-for="bookInfo in bookInfos">
+      <a class="box-card" v-for="bookInfo in bookInfos" :href="bookInfo.book_url">
         <div class="bookInfoImg">
-          <img :src="bookInfo.book_img_url" alt="" >
+          <img :src="bookInfo.book_img_url" :onerror='defaultImg'>
         </div>
         <div class="bookInfoContent">
-          <h2>{{ bookInfo.book_name }}</h2>
-          <p>{{ bookInfo.book_title }}</p>
-          <p>{{ bookInfo.book_url }}</p>
+          <h2 style="margin: 5px 0 0 0;padding: 0">{{ bookInfo.book_name }}</h2>
+          <p style="margin: 5px 0 0 0; padding: 0">作者：{{ bookInfo.book_author }}</p>
+          <p style="height: 70%; margin: 5px 0 0 0; padding: 0;">{{ bookInfo.book_title|ellipsis }}</p>
+          <!--          <p>{{ bookInfo.book_url }}</p>-->
         </div>
-      </div>
+      </a>
     </div>
 
 
@@ -39,29 +40,36 @@ export default {
       pageSize: 10,
       currentPage: 3,
       bookInfos: [],
-      total:0,
+      total: 0,
       search: {
-        pageNum:1,
-        pageSize:10,
+        pageNum: 1,
+        pageSize: 10,
         name: '',
         organizationId: '',
-      }
+      },
+      defaultImg: 'this.src="' + require('../static/img/bookImgError.png') + '"'
     };
   },
   methods: {
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
-      this.search.pageSize=val
+      this.search.pageSize = val
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-      this.search.pageNum=val;
+      this.search.pageNum = val;
       this.getBookInfoList()
     },
-    getBookInfoList(){
-      this.$http.get("/bookInfo/getBookInfoList", {params: {bookType: 1, pageNo: this.search.pageNum, pageSize: this.search.pageSize}}).then((response) => {
+    getBookInfoList() {
+      this.$http.get("/bookInfo/getBookInfoList", {
+        params: {
+          bookType: 1,
+          pageNo: this.search.pageNum,
+          pageSize: this.search.pageSize
+        }
+      }).then((response) => {
         this.bookInfos = response.data.result.list
-        this.total=response.data.result.total;
+        this.total = response.data.result.total;
         console.log(response.data.result)
         console.log(this.total)
       })
@@ -70,10 +78,19 @@ export default {
   created() {
     this.$http.get("/bookInfo/getBookInfoList", {params: {bookType: 1, pageNo: 1, pageSize: 10}}).then((response) => {
       this.bookInfos = response.data.result.list
-      this.total=response.data.result.total;
+      this.total = response.data.result.total;
       console.log(response.data.result)
       console.log(this.total)
     })
+  },
+  filters: {
+    ellipsis(value) {
+      if (!value) return '';
+      if (value.length > 300) {
+        return value.slice(0, 300) + '...'
+      }
+      return value
+    }
   }
 }
 </script>
@@ -89,6 +106,7 @@ export default {
 }
 
 .box-card {
+  text-decoration: none;
   display: flex;
   justify-content: center;
   background: aqua;
@@ -105,7 +123,7 @@ export default {
 .bookInfoImg {
   width: 30%;
   height: 100%;
-  background: red;
+  /*background: red;*/
   position: relative;
   left: 0;
 }
@@ -117,15 +135,20 @@ export default {
 }
 
 .bookInfoContent {
+  font-size: 12px;
   background: antiquewhite;
   width: 85%;
-  margin-left: 15px;
+  padding-left: 15px;
   height: 100%;
   /*float: right;*/
+  text-indent: 24px;
 }
-.block{
+
+.block {
   display: flex;
   justify-content: center;
 
 }
+
+
 </style>
