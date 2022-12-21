@@ -40,12 +40,12 @@ export default new Router({
     {
       path:"/bookTag",
       name:'bookTag',
-      component:bookTag
+      component:()=>import("../components/bookTag")
     },
     {
       path:"/bookInfo",
       name:"bookInfo",
-      component:bookInfo
+      component:()=>import('../components/BookInfo')
     }
   ]
 })

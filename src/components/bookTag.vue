@@ -9,8 +9,7 @@
                  @select="handleSelect"
                  background-color="#545c64"
                  text-color="#fff"
-                 active-text-color="#ffd04b"
-        >
+                 active-text-color="#ffd04b">
           <el-menu-item  style="width: 11%;"  v-for="bookType in bookTypes" v-bind:key="bookType.id" :index="bookType.id.toString()">
             {{ bookType.book_type }}
           </el-menu-item>
@@ -19,9 +18,12 @@
         </el-menu>
         <div class="nav-right">giao~</div>
       </el-header>
-            <el-main>
-              <book-info/>
-            </el-main>
+
+      <el-main>
+        <book-info/>
+<!--        <router-view/>-->
+      </el-main>
+
       <!--      <el-footer>Footer</el-footer>-->
     </el-container>
   </div>
@@ -42,6 +44,15 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
+      console.log(this.bookTypes[key-1].book_type, keyPath);
+      this.$router.push({
+        name:'bookInfo',
+        params: {
+          bookType: key-1,
+          pageNo: 1,
+          pageSize: 20
+        }
+      })
     },
   },
   created() {
@@ -55,6 +66,11 @@ export default {
 <style scoped>
 .index{
   background-image: url("../static/img/Background_with_line_wave_pattern_5.jpg");
+  background-size: cover;
+  background-repeat:repeat-x;
+  /*background-repeat: no-repeat;*/
+  background-position:right top;
+  background-attachment: fixed;
 }
 .homeHeader {
   width: 100%;
@@ -64,7 +80,7 @@ export default {
   width: 50%;
   height: 99%;
   display: inline-block;
-  margin: 0 auto;
+  margin: 0 5%;
   text-align: center;
 }
 .homeHeader .nav-left {

@@ -31,11 +31,13 @@
 </template>
 
 <script>
+import * as bookInfoHttp from '@/api/bookInfo'
+
 export default {
   name: "BookInfo",
   data() {
     return {
-      bookType: 1,
+      bookType: null,
       pageNo: 1,
       pageSize: 10,
       currentPage: 3,
@@ -76,7 +78,11 @@ export default {
     }
   },
   created() {
-    this.$http.get("/bookInfo/getBookInfoList", {params: {bookType: 1, pageNo: 1, pageSize: 10}}).then((response) => {
+    bookInfoHttp.getBookInfoList({
+      bookType: 1,
+      pageNo: 1,
+      pageSize: 10
+    }).then((response) => {
       this.bookInfos = response.data.result.list
       this.total = response.data.result.total;
       console.log(response.data.result)

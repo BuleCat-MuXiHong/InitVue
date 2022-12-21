@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {sum,PI} from "@/utils/math-mind";
+import {sum,PI} from "@/utils/request";
 
 export default {
   name: "SayHi"
